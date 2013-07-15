@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<title>test log js</title>
+	</head>
+	
+	<body>
+		<h1>Test logjs</h1>
+		<button id="log_button">Write log</button>
+		<span id="result_txt"></span>
+
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#log_button').bind('click', function() {
+					$.ajax({
+						url: 'http://localhost:3000/logmein',
+						type: 'POST',
+						//header: {'Access-Control-Allow-Origin:' : '*'},
+						data: {'logmsg': 'Hore! Dari nginx server!'},
+						success: function(data) {
+							$('#result_txt').text('OK');
+							//console.log('success');
+						},
+						error: function(data) {
+							$('#result_txt').text('error');
+							//console.log('error');
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
