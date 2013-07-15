@@ -30,6 +30,7 @@ var app = express();
 // support body data
 app.use(express.bodyParser());
 
+/*
 app.get('/hello.txt', function(req, res){
 	var body = 'Hello World';
 	
@@ -37,6 +38,7 @@ app.get('/hello.txt', function(req, res){
 	res.setHeader('Content-Length', body.length);
 	res.end(body);
 });
+*/
 
 app.get('/query_log', function(req, res){
 	winston.query(options, function (err, results) {
@@ -48,7 +50,8 @@ app.get('/query_log', function(req, res){
   		var body = JSON.stringify(results);
   		res.setHeader('Content-Type', 'text/json');
   		res.setHeader('Content-Length', body.length);
-		res.end(body);
+      res.setHeader('Access-Control-Allow-Origin', '*');
+		  res.end(body);
   	});
 })
 
@@ -56,6 +59,7 @@ app.post('/logmein', function(req, res){
 	//logger.log('info', 'logmein - Hello distributed log files');
 	var log_msg = req.body.logmsg;
 	logger.log('error', '%s - %s', req.ip, log_msg);
+  res.setHeader('Access-Control-Allow-Origin', '*');
 	res.end();
 });
 
