@@ -6,7 +6,8 @@ var EXCFILENAME = 'exceptions.log';
 
 var logger = new (winston.Logger)({
     transports: [
-    new (winston.transports.Console)({ colorize: true }),
+    new (winston.transports.Console)({ colorize: true,
+                                       timestamp: true }),
     new (winston.transports.File)({ filename: LOGFILENAME,
                                     maxsize: 10000000,
                                     maxFiles: 5 })
